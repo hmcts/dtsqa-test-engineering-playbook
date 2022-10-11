@@ -1,0 +1,68 @@
+---
+title: Integration Testing
+weight: 3
+---
+
+# <%= current_page.data.title %>
+
+Integration tests can be considered an extension of unit tests because they focus on cross-cutting concerns such as data validation, security, performance. These concerns cannot be covered in a unit test without introducing too much complexity into the codebase and slowing down development time significantly.
+
+When a unit test fails, there is clearly a bug in the business logic of the code. When an integration test fails, you shouldn’t need to look at the code that implements business logic; the unit tests should flush out bugs at that level. It’s more likely that something has changed in the environment and needs to be addressed. By running integration tests, you can verify if the system works as a whole, which is impossible with unit tests. 
+
+### Write Integration Tests wherever you serialize/deserialize data
+
+Integration Tests test that your application/service can successfully integrate with its surroundings (databases, network, other apis, filesystems, etc.). For your automated tests this means you don’t just need to run your own application but also the component you’re integrating with. If you’re testing the integration with a database you need to run a database when running your tests. For testing that you can read files from a disk you need to save a file to your disk and use it as load it in your integration test.
+
+You should have integration tests where ever data gets serialized/deserialized. The most common scenarios are as follows:
+
+1. reading HTTP requests and sending HTTP responses through your REST API
+
+2. reading and writing from/to a database
+
+3. reading and writing from/to a filesystem
+
+4. sending HTTP(S) requests to other services and parsing their responses
+
+### Don’t test business logic with integration tests
+
+Unit tests test business logic. Not delineating unit tests from integration tests can have a detrimental effect on the time it takes to run your test suite. Developers working on specific business logic in the code must be able to run unit tests and get near-immediate feedback to ensure that they haven’t broken anything before committing code. If their test suite takes too long and they can’t afford to wait for it to finish before committing code, they are likely to just stop running tests altogether (both unit tests and integration tests). This also means that the unit tests are not properly maintained, which can eventually get you into a situation where the effort required to bring your test suite up to date with the code causes real delays in delivery.
+
+### Don’t rely on existing data
+
+A common mistake with integration testing is assuming that certain data will always exist in the application’s database. It may be convenient to assume that a certain user or case will be present but when the data changes, the tests may become unreliable. This is particularly important when running on shared test environments such as AAT where other developers and testers have access.
+
+In an ideal world, it should be possible to deploy an application to a clean environment and run the integration tests without having to perform any manual steps to seed the database. In order to achieve this, integration tests should seed the data they rely on before they run and if possible, remove it afterwards
+
+### Don’t use hard-coded values
+
+When creating data fixtures or choosing input data, using hard-coded values may appear to be the simplest solution. This can work well for an individual test, run in isolation, but can cause problems when tests are repeated.
+
+For instance, the first time the test runs database entries may be saved by the application, based on the inputs from the test. When the test runs a second time using the same input data, the database entries will already exist. By randomising inputs <span style="text-decoration: underline;">within the range of valid values</span>, your tests will be testing different variations and combinations on every run. Care must be used to avoid reducing the determinism of the test but at the same time, a random set of inputs can identify obscure bugs that may overwise go undetected.
+
+### Use Test Doubles
+
+When writing integration tests, you’ll inevitably have to deal with the external dependencies your code interacts with. The usual way to go about this is using mechanisms that replace the external dependencies during testing. So, instead of making a call to the real API, the code under test will be communicating with something that pretends to be the API, while remaining none the wiser. The test will work just as fine but will remain fast and reliable.
+
+Though many people use the word mock refer to those mechanisms, that’s not really accurate. The correct generic term for something that replaces a dependency during testing is test double. Test doubles come in different types. To name a few: stubs, spies, and, yes, mocks. It’s important to understand the difference between the different test doubles and use the ones better suited to your current needs. A good resource to learn about all of this is [this great article by Martin Fowler](https://martinfowler.com/articles/mocksArentStubs.html).
+
+### Log extensively in integration tests
+
+Unit testing has a specific scope, and the tests are usually very small as they are limited to a single unit. So, if a test is unsuccessful, you can easily detect the problem and fix the problem. Integration tests are not that simple. Its scope may include units from different parts of the application, and it can also include different devices and hardware components as some units in an application also work with hardware. In case an integration test fails, it will be way more complex to pinpoint its cause.
+
+Detailed logging will be required to find the cause of failure. Although the logging process can have a significant effect on performance, it should be applied when the chances of failures are significant, or the integration testing process is very complex.
+
+If possible use custom handlers to log all HTTP requests and responses and perhaps include a Correlation ID header when sending HTTP requests in your integration tests. These are another useful tool for investigating issues when tests fail.
+
+### Keep Unit tests and Integration tests separate
+
+By keeping your test suites separate, your developers can feel free to run the quick unit tests during development and before committing any code. The long and tedious integration tests should be reserved for the build server in a separate test suite, and can be run less frequently.
+
+### Don’t mark tests as Ignored
+
+When you discover that a test is flaky, you should react as soon as possible; if you allow yourself to ignore flaky tests, things can only worsen. Tests should never be ignored, if not needed remove completely
+
+### Run integration tests as part of the CI/CD pipeline
+
+Integration tests are usually slow. But they need to be run in order to identify issues with integration between various components.
+
+One of the best practices for integration testing is to run them as part of the CI/CD pipeline. You want to make sure that you are not spending time waiting for tests to finish when you are developing a feature. But when you execute the tests during the continuous integration process, you are running them in a dedicated environment without waiting for the tests to finish. This way, you will know when the latest release has issues that need to be addressed. One of the benefits of the CI/CD process is improved code quality.

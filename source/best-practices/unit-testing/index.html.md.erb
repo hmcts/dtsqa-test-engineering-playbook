@@ -1,0 +1,194 @@
+---
+title: Unit Testing
+weight: 3
+---
+
+# <%= current_page.data.title %>
+
+### Tests Should Be Fast
+
+Developers write unit tests so they can repeatedly run them and check that no bugs have been introduced. If unit tests are slow, developers are more likely to skip running them on their own machines. One slow test won’t make a significant difference; add one thousand more and we’re surely stuck waiting for a while. Slow unit tests may also indicate that either the system under test, or the test itself, interacts with external systems, making it environment-dependent. The execution time for the entire suite should be Fast and take seconds, not minutes.
+
+### Tests should be reliable
+
+Unit tests should fail only if there’s a bug in the system under test. That seems pretty obvious, but programmers often run into an issue when their tests fail even when no bugs were introduced. For example, tests may pass when running one-by-one, but fail when running the whole test suite, or pass on our development machine and fail on the continuous integration server. These situations are indicative of a design flaw. Good unit tests should be reproducible and independent from external factors such as the environment or running order.
+
+### Tests Should Be Simple and Readable
+
+The intent of a unit test should be clear. A good unit test tells a story about some behavioural aspect of our application, so it should be easy to understand which scenario is being tested and — if the test fails — easy to detect how to address the problem. With a good unit test, we can fix a bug without actually debugging the code!
+
+### Arrange, Act, Assert
+
+The AAA (Arrange-Act-Assert) pattern suggests that you should divide your test method into three sections: arrange, act and assert. Each one of them only responsible for the part in which they are named after.
+
+### Name your tests well
+
+Unit testing is more than ensuring production code works. They are the best documentation to track an application’s behaviour. Therefore, you must follow naming standards for each test that explicitly tell the intent of barely reading the names of test cases.
+
+Ideally, you should save your test cases in two parts:
+
+* Save your test with the strategy being tested
+* Save your test with the proposed behaviour when the scenario is requested.
+
+The more readable your tests will be, the more it will be easy to fix a bug for not just the one who wrote it, but for other developers working on the project or will work on the project.
+
+### Stick to single assertion per test
+
+For a unit test to be effective, keep one use case at a time, that is to have only one assertion in the tests. If you’re wondering what would happen if you include multiple asserts in a single test, let’s take a simple example. 
+
+Sometimes more than 10 asserts are included in one set in order to cover more features. Such cases result in going through all assertions to check the root cause of the problem, even if a single failure has occurred. Plus, the rest of the assertions never get checked if one assertion is failed, resulting in an unclear vision of the test being failed. 
+
+Although it seems tedious to write separate test scripts for each assertion, overall it saves more time, effort and is more definitive in the long run. You can also use parameterised tests as they enable you to run the same test multiple times with different values.
+
+### Tests should be deterministic
+
+If the tests are not deterministic, it means that for the same logic under the test, the unit test sometimes passes, but sometimes fails. This un-reliability of tests are not going to help us, as we do not trust them, therefore developers doesn’t show interest to run them. Try and fix these types of tests and make them deterministic. Avoid one test depending on the other, eliminate external dependencies etc.
+
+### Test Shouldn’t Duplicate Implementation Logic
+
+Tests are difficult to maintain if they keep failing even for the slightest changes made to the implementation code. So the best bet is to keep implementation details at bay and save your time from rewriting the tests repeatedly. Thus, coupling tests with implementation details decrease the value of tests. 
+
+Unit tests are more resilient to change if they are not heavily paired with the production code’s internals. It also allows developers to refactor when required and provides valuable feedback with a safety net.
+
+##### Production Code:
+```java
+public static boolean isLeapYear(int year) {
+	Calendar cal = Calendar.getInstance();
+	cal.set(Calendar.YEAR, year);
+	return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
+}
+```
+```java
+public class LeapYearTest {
+	@Test
+	public void year_1999_is_not_a_leap_year() {
+		assertFalse(LeapYear.isLeapYear(1999));
+	}
+	 
+	@Test
+	public void year_1996_is_a_leap_year() {
+		assertTrue(LeapYear.isLeapYear(1996));
+	}
+	 
+	@Test
+	public void year_1900_is_not_a_leap_year() {
+		assertFalse(LeapYear.isLeapYear(1900));
+	}
+	 
+	@Test
+	public void year_2000_is_a_leap_year() {
+		assertTrue(LeapYear.isLeapYear(2000));
+	}
+}
+```
+
+### Tests should be independent
+
+Test runners generally run multiple unit tests at a time without sticking to any particular order, so interdependencies between tests make them unstable and difficult to execute and debug. You should ensure each test case has its own setup and teardown mechanism to avoid test interdependencies.
+
+For example, suppose the test runner is running a few tests in a particular order for a while and a new test is added without its own setup. Now, if the test runner runs all the tests parallel to reduce execution time, it’d disorient the whole test suite, and your tests will start failing. 
+
+### Use Test Doubles
+
+When writing unit tests, you’ll inevitably have to deal with the external dependencies your code interacts with. The usual way to go about this is using mechanisms that replace the external dependencies during testing. So, instead of making a call to the real API, the code under test will be communicating with something that pretends to be the API, while remaining none the wiser. The test will work just as fine but will remain fast and reliable.
+
+Though many people use the word mock refer to those mechanisms, that’s not really accurate. The correct generic term for something that replaces a dependency during testing is test double. Test doubles come in different types. To name a few: stubs, spies, and, yes, mocks. It’s important to understand the difference between the different test doubles and use the ones better suited to your current needs. A good resource to learn about all of this is [this great article by Martin Fowler](https://martinfowler.com/articles/mocksArentStubs.html).
+
+### Don’t mark tests as Ignored
+
+When you discover that a test is flaky, you should react as soon as possible; if you allow yourself to ignore flaky tests, things can only worsen. Tests should never be ignored, if not needed remove completely
+
+### Never write unit tests after the production code
+
+Unit tests are at the base of the testing pyramid and are the earliest tests conducted in the development cycle. Therefore, they work best when they are run alongside the development and not after it.
+
+Setting up unit tests as early as possible promotes writing clean code and identifying bugs early on. Writing tests at the end of development may result in non-testable code. On the contrary, writing tests parallel to the production code allows us to review both test code and production code together. It further helps the developers better understand the code. It also makes the process of unit testing more scalable and sustainable.
+
+Some prefer writing unit tests before the production code, which essentially becomes Test-driven development (TDD). This practice helps you mentally prepare for the expected behaviour of the code. It raises questions and cases even before you start writing the code unlike asking them during the development process. TDD approach helps reduce time spent on reworks and debugging. It instantly tells you if the last refactoring broke the previously working code or not. Combined with unit testing, it can identify errors and problems quickly.
+
+### Unit tests should run as part of the CI/CD Pipeline
+
+Automating the tests by including them in a CI/CD pipeline allows you to easily run tests multiple times in a day. It enables continuous testing and test execution on each code commit. Even if you forget to run a test, the CI server won’t and will prevent passing on buggy code to the customers.
+
+### Consider Data Driven with your unit testing framework
+
+Data-driven testing is a powerful way of testing a given scenario with different combinations of input values.
+
+##### Data Driven Test
+```java
+@RunWith(JUnitParamsRunner.class)
+public class WhenEarningStatusWithJUnitParams {
+	@Test
+	@Parameters({
+		"Bronze, 0,   100,  Bronze",
+		"Bronze, 0,   300,  Silver",
+		"Bronze, 100, 200,  Silver",
+		"Bronze, 0,   700,  Gold",
+		"Bronze, 0,   1500, Platinum"
+
+		})
+	public void shouldUpgradeStatusBasedOnPointsEarned(Status initialStatus, int initialPoints,
+	int earnedPoints, Status finalStatus) {
+		FrequentFlyer member = FrequentFlyer.withFrequentFlyerNumber("12345678")
+		.named("Joe", "Jones")
+		.withStatusPoints(initialPoints)
+		.withStatus(initialStatus);
+
+		member.earns(earnedPoints).statusPoints();
+
+		assertThat(member.getStatus()).isEqualTo(finalStatus);
+	}
+}
+```
+
+### Consider using Testing techniques (Equivalence class Partition, Boundary value Analysis, State Transition Table)
+
+#### 1. Equivalence Class Partition (ECP): 
+
+This technique is typically used to reduce the total number of test cases to a finite set of testable test cases, still covering maximum requirements.
+
+The idea is to divide the possible input values into set of classes and test one input from each class. 
+
+Imagine, if there is a text box that accepts only numerics between 1 and 10, then the logical partitions should look like the following table.
+
+| | | |
+|-|-|-|
+|Class 1	|Pick any negative number|Invalid|
+|Class 2	|Choose a number between 1 and 10	|Valid	|
+|Class 3	|Choose a number above 10		|Invalid|
+|Class 4	|Pick any Special character		|Invalid|
+|Class 5 	|Pick any Alphabet			|Invalid|
+
+#### 2. Boundary value Analysis (BVA)
+
+Boundary testing is the process of testing between extreme ends or boundaries between partitions of the input values.
+
+So these extreme ends like Start- End, Lower- Upper, Maximum-Minimum, Just Inside-Just Outside values are called boundary values and the testing is called “boundary testing”.
+
+The basic idea in normal boundary value testing is to select input variable values at their:
+
+* Minimum
+* Just above the minimum
+* A nominal value
+* Just below the maximum
+* Maximum
+
+|Range|Input Values|Rate|
+|-|-|-|
+|£0 to £12,570		|£0, £10000, £12570		|Personal Allowance	|
+|£12,571 to £50,270	|£12571, £30000, £50270		|Basic Rate		|
+|£50,271 to £150,000	|£50271, £100000, £150000	|Higher Rate		|
+
+#### 3. State Transition Table
+
+State Transition testing, in which outputs are triggered by changes to the input conditions or changes to ‘state’ of the system. In other words, tests are designed to execute valid and invalid state transitions.
+
+
+| |Action|Expected Behaviour|Balance|
+|-|-|-|-|
+| | | |£1,500|
+|Day1	|Withdraw £500	|Successful			|£1,000	|
+|Day1	|Withdraw £500	|Successful			|£500	|
+|Day1	|Withdraw £500	|Reached Daily withdrawal limit	|£500	|
+|Day2	|Withdraw £500	|Successful			|£0	|
+|Day2	|Withdraw £500	|Insufficient funds		|£0	|

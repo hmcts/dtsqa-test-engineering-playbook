@@ -1,0 +1,26 @@
+---
+title: Manual Testing
+weight: 3
+---
+
+# <%= current_page.data.title %>
+
+### Any test case that is not suitable for automation testing should be included in manual test pack
+
+Any test that is not part of the unit, integration, contract or UI end to end automated tests must be included in the manual test pack. Some examples include, file downloads, captcha, visual testing elements, two factor authentication scenarios where 
+
+### Record all your manual test cases in Zephyr or similar
+
+Record your test cases into Zephyr or similar tool. This way we can keep track of what can be tested for a release
+
+### Make sure to include all necessary elements when you write your test case
+
+Test case to include Test case id, test case description, test steps, test data, expected result, actual result and test status (Pass/ fail)
+
+### Test Data Preparation
+
+With the automation tests we write the code to create and destroy the data that is required for the tests, but we do not have that luxury when it comes to manual testing, so it is important to create the test data appropriately to start.
+
+### Don’t forget to execute your manual tests for every release
+
+It is often the case that automated tests will be part of the CI/CD pipeline and they will run automatically every time the the pipeline is triggered. We pay no or little attention to manual test case execution release.

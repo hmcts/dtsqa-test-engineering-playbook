@@ -1,0 +1,150 @@
+---
+title: Test and Quality Aproach for Services Developed Using "Automation"
+weight: 3
+---
+
+# <%= current_page.data.title %>
+
+### Background
+
+It has been identified that one of the areas that we believe we need to focus on within HoSE, is establishing the test and Quality approach for services developed using the ‘automation’ approach and environments.
+ 
+We have an established testing and QA approach/standard established (under CFT Reform) for services developed under the standard ‘Java stack’ but we don’t have a parallel approach/standard for ‘automation’ to our knowledge.
+ 
+The current ‘push’ under HoSE is to look to make a recommendation regarding an ‘automation’ tool and the ‘point and click’ type tools provided by the PowerPlatform seem to be front-running in this exercise.
+ 
+On that basis, it may well make sense to investigate and capture the approach / standards that could / would be adoptable, should the PowerPlatform be in-turn, adopted.  
+ 
+This would make a useful companion and input element to the exercise that our team is currently undertaking too i.e. if we go this way, how is Quality established and verified.
+ 
+Within DTS, there has been a recent development using elements of the PowerPlatform e.g. to our knowledge Pre-Recorded Evidence (PRE) has utilised PowerApps (from the PowerPlatform tool set) so this may be a good starting point to begin an analysis of how testing has been undertaken within PRE and ultimately how a Quality baseline has been assured, prior to MVP deployment to Production.
+
+#### List of actions Identified to perform this task.
+
+1. Establish contact with the PRE team
+2. Perform analysis to understand the test approach undertaken within PRE
+3. Review this test approach - compare and align the testing standard objectives (levels) against the standards established for CFT (standard Java stack)
+4. Align standards against existing approach/standards - highlighting differences and why they differ using ‘automation’ (e.g. automated testing may not be possible in an ‘automation’ environment - for whatever reason, the tooling will be different i.e. SonarCube can’t be utilised, so XYZ is used, is Zap (or whatever tool is used now on CFT Reform) adaptable for establishing an OWASP security standard, etc etc etc…).
+5. Examine ‘industry’ standards and align/tweak to accommodate, as appropriate
+6. Examine how other ‘automation’ testing has been undertaken to date within DTS e.g. how do we test RPA using the UIPath toolset - and does this differ from ‘automation’ using PowerPlatform - if there are differences - what are they, why do they exist and is it ok?.
+7. Document recommended standard for ‘automation’ testing
+8. Validate
+9. Socialise
+10. Support Uptake Drive.
+
+### The current Test approach with in the PRE team
+
+
+Because the nature of Low code PowerApps application development with PowerApp platform Test approach will differ from traditional web app testing. PRE QA team will try to fit reform Test standards as many as applicable to PowerApps
+
+![approach](../images/approach.png)
+
+#### Static QA:
+
+The following Test Stages will be run before deployment of app to power platform
+
+1. Solution Checker -  [https://docs.microsoft.com/en-us/power-platform/alm/devops-build-tool-tasks](https://docs.microsoft.com/en-us/power-platform/alm/devops-build-tool-tasks)
+2. SonarQube  for Top-10 Vulnerabilities. -  [https://www.sonarqube.org/features/security/owasp/](https://www.sonarqube.org/features/security/owasp/)
+3. Dependency Checker - 
+4. Accessibility testing - Using pa11y and [https://docs.microsoft.com/en-us/powerapps/maker/canvas-apps/accessible-apps](https://docs.microsoft.com/en-us/powerapps/maker/canvas-apps/accessible-apps)
+
+#### Dynamic QA:
+
+1. Smoke Test  -  First happy path scenario before progressing build different environment
+2. Automated Acceptance Test (Functional UI Test) -   Using SpecFlow + Playwright + .Net
+
+#### Manual QA:
+
+Any tests which can’t automated like below will be covered as a part of the Manual QA using tool Zephyr for Jira.
+
+1. Video Controls
+2. Video latency
+3. Visual representations
+4. Time bound acceptance criteria
+
+Automation testing tools consider for PRE team is as follows.
+
+1. Test Studio
+2. PlayWright
+3. Cypress
+
+
+Please see below the comparisons of what can/ can’t be done with each of these tools. 
+
+| |Cypress|Playwright|Test Studio|
+|-|-|-|-|
+|Multiple Domain support	 	|No		|Yes	|No|
+|Authentication process setup	 	|Long		|easy	|Yes|
+|webkit support (safari)		|No		|Yes	|Yes|
+|Multiple browsers at the same time	|No		|Yes	|No |
+|Mature community			|Yes		|Yes	|No |
+|Iframe support				|Limited(no)	|Yes	|Yes|
+|Hover support				|No		|Yes	|No |
+|Licensing required for some tools 	|Yes		|No	|Yes|
+|support for multiple Language		|Yes		|Yes	|No |
+|Recording tool				|Yes		|Yes	|Yes|
+|Network Monitoring			|Yes		|Yes	|No |
+|Video and Screen capture		|Yes		|Yes	|No |
+|Test readability and maintainability	|Yes		|Yes	|No |
+|Execution speed with automatic wait	|Yes		|Yes	|No |
+
+<div class="table-wrap">
+   <table class="wrapped confluenceTable" resolved="">
+      <tbody>
+         <tr>
+            <td class="confluenceTd">Testing Type</td>
+            <td class="confluenceTd">Process For Automation-Type</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Testing during the development</td>
+            <td class="confluenceTd">1. Devloper should test each step working as expected as soon as they add the step.<br><br>If the App use any custom code, then it should adhere to the following standards<br>All new code and re-factored (legacy) code should be unit tested.<br>Every test includes an assert<br><br>Scope of tests will include valid, invalid &amp; edge cases derived during 3 Amigo (or similar meeting)<br>JIRA tasks related to unit tests<br>Coverage criteria is &gt; 80%<br>Sonar-cloud code quality criteria met (i.e. Duplicated Lines &lt; 3%)</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Static analysis</td>
+            <td class="confluenceTd">1. Flow Checker: No errors should be reported by flow checker <br>2. Solution Checker: No errors should be reported by solution checker<br>Please Note:&nbsp; These checkers only applicable for power Platform</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Integration Testing</td>
+            <td class="confluenceTd">1. All integrations with custom conectors are tested.<br>2. Dataverse is a feature of power platform and not an external component, we should still need some level of testing to make sure everything is working as expected.<br>3. Integration test report should be published to CI/CD pipeline.<br>4. Jira tasks created for integration tests</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Smoke Testing</td>
+            <td class="confluenceTd">1. First happy path scenario should be tested before progressing build to different environment.</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">UI Functional</td>
+            <td class="confluenceTd">1. Consider Test Pyramid, UI functional tests sits at the top of the pyramid and only write critical path scenarios. Keep it to minimum.<br>2. Make sure no duplication of the tests from previous testing type (other levels of the test pyramid)<br>3. Use the tools such as PlayWright, Codecept JS, Protractor or similar.<br>4. Make sure to use the tools that produces test reports and the same will be published via Jenkins</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Manual &amp; Exploratory Testing</td>
+            <td class="confluenceTd">1. Any tests that were not possible to automate must be reviewed and documented (in Zephyr or simiar).<br>2. Make sure to run these manual tests everytime we release.</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Performance Testing</td>
+            <td class="confluenceTd">“Response time are measured by 95th percentiles<br>UI - 1500ms<br>Volume (Throughput) - defined at the project level<br>User Concurrency - defined at the project level<br>Pipeline - 10 users minimum<br>Server utlisation<br>ASE - I2 | 2 - 60% CPU &amp; RAM<br>Containers - 60% CPU &amp; RAM<br>Cluster - 60% CPU &amp; RAM (total - all Containers)”</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Security Testing</td>
+            <td class="confluenceTd">Yarn audit and Helmet running<br>Zap Overnights implemented</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">External Pen Testing</td>
+            <td class="confluenceTd">ITHC completed / scheduled where applicable<br>Outstanding issues?<br>Test Report Stats?</td>
+         </tr>
+         <tr>
+            <td class="confluenceTd">Accessability Testing</td>
+            <td class="confluenceTd">
+               <p>1. Pa11y - all pages spidered - no outstanding AA or A compliancy failures.<br>2. Accessability checker in powerApps helps highlight the common accessability issues.<br>Compliant with WCAG 2.1 (update includes devices)<br>Manual device testing - windows NVDA / JAWS. Mac VoiceOver, Keyboard, iOS/ Android mobile and tablet<br>DAC audit completed / Scheduled where applicable - especially after major code changes<br>Outstanding issues?<br>Test Report Stats?<br>Accessibility statement up-to-date</p>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+Proper testing methods and techniques become even more important to make the transition to RPA as successful as possible. Although RPA testing practices are similar to that of other types of software testing.
+
+1. <strong>Understand the business process.</strong> As a process is being automated, it will go through many changes. Before any testing activities can begin, the primary goal of the test team should be to fully understand the newly automated process. This is one of the most important steps in the test cycle because it lays the foundation on which the other steps are built. The best way to understand the process is to review the Process Definition Document (PDD), the Solution Design Document (SDD) and any other documentation that was created during the design phase of the automation. Once the team understands the business process, it can move on to the next step, creating the test scenarios to test the code against the business rules.
+2. <strong>Test scenarios.</strong> Now it’s time to verify the automation has been developed according to the business rules documented in the design documents. The key to having good test scenarios is to make sure they are clear, concise and cover each business rule noted in the PDD/SDD. Usually, the SDD lists the required scenarios that need to be validated during testing, but it’s also important to review the process flows and cross-verify the SDD for any missing information.
+3. <strong>Test scripts.</strong> This stage requires putting together the information you’ve previously gathered. The test script is made up of numerous test cases with a variety of explicit outcomes. It is typically in an Excel format and will contain the test scenarios, input data requirements for testing the scenarios, expected and actual results, and a pass or fail column. Like the test scenarios, it is best to write the script clearly and concisely. The more thorough the script, the less chance of gaps or missed test scenarios. Depending on the complexity of the process, it can be a good idea to have the design team review the script and make any changes or suggestions. This additional step can help eliminate any gaps that may arise during testing.
+4. <strong>Test the data.</strong> Test data is the fuel for the fire. Without valid test data, automation testing can lead to inaccurate test results, which can lead to invalid defects, often creating a strain on the testing timeline. This is why it’s important to have a clear understanding of what type of data and format you need for a successful testing cycle.
+5. <strong>Manage defects.</strong> As expected with any automation testing, defects will be found. The team must document the defects and notify the development team. The key to effective defect management is detail. The more information the test team can provide, the quicker the correction can be made. Some ways to provide details include: writing the test-case description, taking a screenshot of the error, recording where the process is failing, attaching the input file used to test, and attaching the output file produced by the automation.
