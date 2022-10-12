@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en" class="govuk-template no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Test Tools - Hot Playbook</title>
+
+    <link href="/dtsqa-test-engineering-playbook/stylesheets/manifest.css" rel="stylesheet" />
+
+    <link rel="canonical" href="test-engineering-playbook/automation-and-tooling/test-tools/">
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content="test-engineering-playbook/images/govuk-large.png" />
+      <meta name="twitter:title" content="Test Tools - Hot Playbook" />
+      <meta name="twitter:url" content="test-engineering-playbook/automation-and-tooling/test-tools/" />
+
+      <meta property="og:image" content="test-engineering-playbook/images/govuk-large.png" />
+      <meta property="og:site_name" content="Hot Playbook" />
+      <meta property="og:title" content="Test Tools" />
+      <meta property="og:type" content="object" />
+      <meta property="og:url" content="test-engineering-playbook/automation-and-tooling/test-tools/" />
+
+    
+  </head>
+
+  <body class="govuk-template__body">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+        <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-header__container--full-width">
+    <div class="govuk-header__logo">
+      <a href="https://hmcts.github.io/dtsqa-test-engineering-playbook" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="govuk-header__logotype-crown"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 132 97"
+            height="30"
+            width="36"
+          >
+            <path
+              fill="currentColor" fill-rule="evenodd"
+              d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"
+            ></path>
+          </svg>
+          <span class="govuk-header__logotype-text">
+            GOV.UK
+          </span>
+        </span>
+        <span class="govuk-header__product-name">
+          Hot Playbook
+        </span>
+      </a>
+        <strong class="govuk-tag">Beta</strong>
+    </div>
+    <div class="govuk-header__content">
+      <nav class="govuk-header__navigation govuk-header__navigation--end" aria-label="Menu">
+        <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide menu">Menu</button>
+        <ul id="navigation" class="govuk-header__navigation-list">
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">About</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Get Started</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Documentation</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Support</a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      </div>
+
+        <div id="toc-heading" class="toc-show fixedsticky">
+          <button type="button" class="toc-show__label js-toc-show" aria-controls="toc">
+            Table of contents <span class="toc-show__icon"></span>
+          </button>
+        </div>
+
+      <div class="app-pane__body" data-module="in-page-navigation">
+          <div class="app-pane__toc">
+            <div class="toc" data-module="table-of-contents" tabindex="-1" aria-label="Table of contents" role="dialog">
+              
+              <button type="button" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></button>
+              <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
+                      <ul>
+  <li>
+    <a href="/"><span>Test Engineering Playbook</span></a>
+  </li>
+<li><a href="/testing-standards/"><span>Testing Standards</span></a>
+<ul>
+  <li>
+    <a href="/testing-standards/test-strategy/"><span>Test Strategy</span></a>
+  </li>
+  <li>
+    <a href="/testing-standards/definition-ready-done/"><span>Definition of Ready and Done</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/testing-standards/key-practices/"><span>Key Practices</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+<li><a href="/best-practices/"><span>Best Practices</span></a>
+<ul>
+  <li>
+    <a href="/best-practices/manual-testing/"><span>Manual Testing</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/integration-testing/"><span>Integration Testing</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/exploratory-testing/"><span>Exploratory Testing</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/end-to-end/"><span>End to End (Functional) Testing</span></a>
+    <ul>
+      <li>
+      </li>
+      <li>
+        <a href="/best-practices/end-to-end/#specific-to-ui"><span>Specific to UI</span></a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/unit-testing/"><span>Unit Testing</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/contract-testing/"><span>Contract Testing</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/frontend-testing/"><span>Testing Frontend Applications</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/best-practices/testing-power-platform/"><span>Testing on Power Platform</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+<li><a href="/automation-and-tooling/"><span>Automation and Tooling</span></a>
+<ul>
+  <li>
+    <a href="/automation-and-tooling/automation/"><span>Test and Quality Aproach for Services Developed Using “Automation”</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/automation-and-tooling/test-tools/"><span>Test Tools</span></a>
+    <ul>
+      <li>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+</ul>
+
+
+              </nav>
+            </div>
+          </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <h1 id="test-tools">Test Tools</h1>
+<h3 id="automation">Automation</h3>
+<p>Below are the automation tools approved by the AWG for different phases/disciplines of automated testing. Before adopting any further tools we should consider the following questions:</p>
+
+<ul>
+<li>Are other project teams testing the same tech stack with an already approved existing test tool?</li>
+<li>Will the tool support the programmes ability to transfer developers, testers and BAs between project teams?</li>
+<li>How well supported is the tool - is it in Beta, are their support forums, how good is the documentation?</li>
+<li>Are there are challenges hiring staff with the tool skillset?</li>
+<li>Will the tool be easily picked up by the future support teams?</li>
+<li>Is it open source or are there any costs?</li>
+<li>Will the tool tie as to a particular supplier?</li>
+<li>Ease of use for the team (including the existing DTS team)</li>
+<li>What reporting to the business does the tool provide?</li>
+</ul>
+
+<div class="table-wrap">
+   <table class="wrapped relative-table confluenceTable tablesorter tablesorter-default stickyTableHeaders" style="width: 100%; padding: 0px;" role="grid" resolved="">
+      <colgroup>
+         <col style="width: 17.5782%;">
+         <col style="width: 14.9719%;">
+         <col style="width: 32.661%;">
+         <col style="width: 3.5489%;">
+      </colgroup>
+      <thead class="tableFloatingHeaderOriginal">
+         <tr role="row" class="tablesorter-headerRow">
+            <th colspan="1" class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="0" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Test Type: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner"><span>Test Type</span></div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="1" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Tool: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Tool</div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="2" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Purpose: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Purpose</div>
+            </th>
+            <th colspan="1" class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="3" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Path-to-Live: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Path-to-Live</div>
+            </th>
+         </tr>
+      </thead>
+      <thead class="tableFloatingHeader" style="display: none;">
+         <tr role="row" class="tablesorter-headerRow">
+            <th colspan="1" class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="0" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Test Type: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner"><span>Test Type</span></div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="1" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Tool: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Tool</div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="2" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Purpose: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Purpose</div>
+            </th>
+            <th colspan="1" class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="3" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Path-to-Live: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Path-to-Live</div>
+            </th>
+         </tr>
+      </thead>
+      <tbody aria-live="polite" aria-relevant="all">
+         <tr role="row">
+            <td colspan="1" class="confluenceTd">
+               <p><span>Unit Testing for Node.js/Angular.js Apps</span></p>
+               <p><span><br></span></p>
+               <p><span><br></span></p>
+               <p><span><br></span></p>
+               <p><br></p>
+            </td>
+            <td class="confluenceTd">
+               <p><a href="https://mochajs.org/" class="external-link" rel="nofollow">Mocha</a></p>
+               <p><a href="http://chaijs.com/" class="external-link" rel="nofollow">Chai</a></p>
+               <p><a href="http://sinonjs.org/" class="external-link" rel="nofollow">Sinon.js</a></p>
+               <p><a href="https://github.com/visionmedia/supertest" class="external-link" rel="nofollow">Super Tes</a>t</p>
+               <p>Karma</p>
+               <p>Jasmine</p>
+            </td>
+            <td class="confluenceTd">
+               <p>Unit tests will be using Super test which is a nodejs test framework</p>
+               <p>Mocha will be used to write readable tests</p>
+               <p>Chai is the assertion framework used in reform projects</p>
+               <p>Sinon for Mocks and stubs if needed</p>
+               <p>Karma runner</p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Unit Testing for Java/C# app (spring boot)</span></td>
+            <td colspan="1" class="confluenceTd">
+               <p>Junit / NUnit (Video Hearings)</p>
+               <p><br></p>
+            </td>
+            <td colspan="1" class="confluenceTd">
+               <p>Unit tests for Java app - Drop Wizard (springboot for Probate team)</p>
+               <p><br></p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd">Integration testing</td>
+            <td colspan="1" class="confluenceTd">
+               <p>SpringBootTest (for Spring)</p>
+               <p>Mockito</p>
+               <p><span style="color: rgb(3,47,98);">spring-cloud-contract-wiremock</span></p>
+               <p><span style="color: rgb(3,47,98);"><a href="https://docs.hoverfly.io/projects/hoverfly-java/en/latest/" class="external-link" rel="nofollow">Hoverfly-java</a> for service virtualization</span></p>
+            </td>
+            <td colspan="1" class="confluenceTd"><br></td>
+            <td colspan="1" class="confluenceTd"><br></td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Accessibility Testing</span></td>
+            <td class="confluenceTd">
+               <p><a href="http://pa11y.org/" class="external-link" rel="nofollow">Pa11y</a></p>
+               <p>aXe Coconut</p>
+               <p>NVDA</p>
+               <p>JAWs</p>
+               <p>Voice Over (mobile devices)</p>
+               <p>w3c-validate</p>
+               <p><br></p>
+               <p>See also the <a href="/confluence/display/RQA/Accessibility+Approach">accessibility approach</a> for assistive tools.</p>
+            </td>
+            <td class="confluenceTd">
+               <p>Accessibility testing tool which will be run as part of the build which will help to identify Accessibility problems in the build phase itself.</p>
+               <p><br></p>
+               <p><br></p>
+               <p><br></p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Performance/Stress Testing</span></td>
+            <td class="confluenceTd"><a href="http://gatling.io/" class="external-link" rel="nofollow">Gatling</a></td>
+            <td class="confluenceTd">
+               <p>An DSL load Testing tool which simulates HTTP traffic to the target server</p>
+               <p>Gatling docker image will be used to run performance tests in jenkins <strong>docker pull satyachundur/gatling-reform</strong></p>
+               <p><br></p>
+            </td>
+            <td colspan="1" class="confluenceTd">N</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Rest Services Functional tests</span></td>
+            <td colspan="1" class="confluenceTd">
+               <p>Java</p>
+               <p><a href="https://github.com/rest-assured/rest-assured" class="external-link" rel="nofollow">Rest Assured</a></p>
+               <p><a href="https://github.com/serenity-bdd/serenity-core/tree/master/serenity-rest-assured" class="external-link" rel="nofollow">Serenity</a></p>
+               <hr>
+               <p>.NET</p>
+               <p><a href="http://restsharp.org/" class="external-link" rel="nofollow">RestSharp</a></p>
+            </td>
+            <td colspan="1" class="confluenceTd">
+               <p>DSL Functional testing for Rest services.</p>
+               <p>Serenity for reporting</p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Functional tests</span></td>
+            <td colspan="1" class="confluenceTd">
+               <p>NODE</p>
+               <p><a href="http://codecept.io/" class="external-link" rel="nofollow">CodeceptJS</a></p>
+               <p><a href="https://www.npmjs.com/package/puppeteer" class="external-link" rel="nofollow">puppeteer</a></p>
+               <p><a href="https://www.npmjs.com/package/webdriverio" class="external-link" rel="nofollow">webdriverio</a> (for sauce labs)</p>
+               <hr>
+               <p>ANGULAR</p>
+               <p><a href="http://www.protractortest.org/#/" class="external-link" rel="nofollow">Protractor</a> + CucumberJS</p>
+               <hr>
+               <p>RUBY / PYTHON</p>
+               <p>Capybara</p>
+               <p>RSpec</p>
+               <p><br></p>
+            </td>
+            <td colspan="1" class="confluenceTd">
+               <p>(This tool is still under review)</p>
+               <p>Acceptance functional Tests for Nodejs application. Test runner agnostic which runs on Webdriver io, protactor, Selenium Webdriverjs, NightmareJs, PhantomJs and others.</p>
+               <p><br></p>
+               <hr>
+               <p><br></p>
+               <p>Protractor will be used on Angular projects like CCD</p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Cross Browser testing</span></td>
+            <td colspan="1" class="confluenceTd"><a href="https://saucelabs.com/" class="external-link" rel="nofollow">Saucelabs</a></td>
+            <td colspan="1" class="confluenceTd">Cloud based service provider for executing the Functional End to End tests in different browsers and different devices.</td>
+            <td colspan="1" class="confluenceTd">N</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span><a href="/confluence/display/RQA/Security+Testing+Checklist+for+Reform+-Work+In+Progress">Security Testing</a></span></td>
+            <td colspan="1" class="confluenceTd">
+               <p><a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" class="external-link" rel="nofollow">ZAP</a> (Zed Attack Proxy)</p>
+               <p>See <a href="/confluence/display/RQA/Security+Testing+Checklist+for+Reform+-Work+In+Progress">Security Testing</a> for complete list</p>
+               <p>++Add link to PET security page++</p>
+               <p><a class="confluence-userlink user-mention userlink-2" data-username="Alexa.Ballantine" href="/confluence/display/~Alexa.Ballantine" data-linked-resource-id="205539746" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://tools.hmcts.net/confluence" title="" data-user-hover-bound="true">Alexa Ballantine</a></p>
+            </td>
+            <td colspan="1" class="confluenceTd">This Security testing framework will be used to verify the source code vulnerabilities at the build phase</td>
+            <td colspan="1" class="confluenceTd">N</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd">Dependency management (security)</td>
+            <td colspan="1" class="confluenceTd"><a href="https://wiki.jenkins-ci.org/display/JENKINS/OWASP+Dependency-Check+Plugin" class="external-link" rel="nofollow">OWASP Dependency check</a></td>
+            <td colspan="1" class="confluenceTd">
+               <p>Checks A9 on the OWASP Top 10:</p>
+               <p>‘Using components with known vulnerabilities’</p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+         <tr role="row">
+            <td colspan="1" class="confluenceTd"><span>Reporting Frameworks</span></td>
+            <td colspan="1" class="confluenceTd">
+               <p><a href="https://www.npmjs.com/package/mocha-junit-reporter" class="external-link" rel="nofollow">Mocha Junit Reporter</a></p>
+               <p><br></p>
+               <p><a href="https://github.com/adamgruber/mochawesome" class="external-link" rel="nofollow">Mocha Awesome Report</a></p>
+               <p>CucumberJS reporting</p>
+               <p><br></p>
+               <p><a href="http://gatling.io/docs/2.2.2/general/reports.html" class="external-link" rel="nofollow">Gatling Reports</a></p>
+               <p><br></p>
+               <p><a href="https://istanbul.js.org/" class="external-link" rel="nofollow">Istanbul</a></p>
+            </td>
+            <td colspan="1" class="confluenceTd">
+               <p>A unit test runner report which will generate once Jenkins runs unit tests and accessibility tests</p>
+               <p>A HTML report runner which will be used to generate html reports in jenkins after running End to End tests.</p>
+               <p>Gatling high chart reports will be used to generate Performance test reports after executing Performance tests</p>
+               <p><br></p>
+               <p>Supports javascripting testing frameworks such as Mocha</p>
+            </td>
+            <td colspan="1" class="confluenceTd">Y</td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<h3 id="standard-test-tools">Standard test tools</h3>
+<p>The following test tools are either used independently of the build, test, deploy pipeline or can be run both as Jenkins jobs and externally.</p>
+
+<ul>
+<li>Zephyr for JIRA - test management tools</li>
+<li>Pa11y (run in sprint but can also be run post deploy)</li>
+<li>Zap (run post deploy independent of SonarQube)</li>
+<li>Sauce Labs for both automated and manual cross device testing</li>
+<li>http://www.mobilephoneemulator.com/</li>
+<li>Mozilla observatory for security scanning</li>
+<li>SoapUI - api testing tool</li>
+<li>BugMagnet</li>
+<li>HTML CodeSniffer (run on demand or paste in code here http://squizlabs.github.io/HTML_CodeSniffer/)</li>
+</ul>
+<h3 id="add-ons">Add-ons</h3>
+
+<div class="table-wrap">
+   <table class="relative-table wrapped confluenceTable tablesorter tablesorter-default stickyTableHeaders" style="width: 31.9149%; padding: 0px;" role="grid" resolved="">
+      <colgroup>
+         <col style="width: 19.0594%;">
+         <col style="width: 80.9406%;">
+      </colgroup>
+      <thead class="tableFloatingHeaderOriginal">
+         <tr role="row" class="tablesorter-headerRow">
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="0" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Browser: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Browser</div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="1" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Add-ons: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Add-ons</div>
+            </th>
+         </tr>
+      </thead>
+      <thead class="tableFloatingHeader" style="display: none;">
+         <tr role="row" class="tablesorter-headerRow">
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="0" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Browser: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Browser</div>
+            </th>
+            <th class="confluenceTh tablesorter-header sortableHeader tablesorter-headerUnSorted" data-column="1" tabindex="0" scope="col" role="columnheader" aria-disabled="false" unselectable="on" aria-sort="none" aria-label="Add-ons: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+               <div class="tablesorter-header-inner">Add-ons</div>
+            </th>
+         </tr>
+      </thead>
+      <tbody aria-live="polite" aria-relevant="all">
+         <tr role="row">
+            <td class="confluenceTd">Chrome</td>
+            <td class="confluenceTd">
+               <ul>
+                  <li>Responsive web design tester</li>
+                  <li>POSTMAN (with Interceptor)</li>
+                  <li><span style="color: rgb(48,57,66);">aXe</span></li>
+                  <li>ObservePoint</li>
+                  <li><a href="https://chrome.google.com/webstore/detail/bug-magnet/efhedldbjahpgjcneebmbolkalbhckfi?hl=en" class="external-link" rel="nofollow">Bug magnet</a> - for Exploratory testing</li>
+               </ul>
+            </td>
+         </tr>
+         <tr role="row">
+            <td class="confluenceTd">Firefox</td>
+            <td class="confluenceTd">
+               <ul>
+                  <li>Fiddler<br><br></li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+            
+          </main>
+
+          <aside>
+              <ul class="contribution-banner">
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook/blob/source/source/automation-and-tooling/test-tools/index.html.md.erb">View source</a></li>
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook/issues/new?body=Problem+with+%27Test+Tools%27+%28test-engineering-playbook%2Fautomation-and-tooling%2Ftest-tools%2F%29&amp;labels=bug&amp;title=Re%3A+%27Test+Tools%27">Report problem</a></li>
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook">GitHub Repo</a></li>
+              </ul>
+          </aside>
+
+          <footer class="govuk-footer app-footer" role="contentinfo">
+  <div class="govuk-footer__meta">
+    <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="govuk-footer__licence-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 483.2 195.7"
+        height="17"
+        width="41"
+      >
+        <path
+          fill="currentColor"
+          d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+        />
+      </svg>
+      <span class="govuk-footer__licence-description">
+        All content is available under the
+        <a
+          class="govuk-footer__link"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="license"
+        >Open Government Licence v3.0</a>, except where otherwise stated
+      </span>
+    </div>
+    <div class="govuk-footer__meta-item">
+      <a
+        class="govuk-footer__link govuk-footer__copyright-logo"
+        href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+      >© Crown copyright</a>
+    </div>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/dtsqa-test-engineering-playbook/javascripts/application.js"></script>
+  </body>
+</html>
