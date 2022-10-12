@@ -1,18 +1,18 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: hmcts.github.io/hot-playbook
+host: test-engineering-playbook
 
 # Header-related options
 show_govuk_logo: true
 service_name: Hot Playbook
-service_link: https://hmcts.github.io/hotplaybook
+service_link: https://hmcts.github.io/dtsqa-test-engineering-playbook
 phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://hmcts.github.io/hotplaybook
-  Get Started: https://hmcts.github.io/hotplaybook
-  Documentation: https://hmcts.github.io/hotplaybook
-  Support: https://hmcts.github.io/hotplaybook
+  About: https://hmcts.github.io/dtsqa-test-engineering-playbook
+  Get Started: https://hmcts.github.io/dtsqa-test-engineering-playbook
+  Documentation: https://hmcts.github.io/dtsqa-test-engineering-playbook
+  Support: https://hmcts.github.io/dtsqa-test-engineering-playbook
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: false
@@ -35,5 +35,5 @@ max_toc_heading_level: 2
 prevent_indexing: false
 
 show_contribution_banner: true
-github_repo: alphagov/YOUR_REPO
-github_branch: main
+github_repo: https://hmcts.github.io/dtsqa-test-engineering-playbook
+github_branch: source
