@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en" class="govuk-template no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Automation and Tooling - Hot Playbook</title>
+
+    <link href="/stylesheets/manifest.css" rel="stylesheet" />
+
+    <link rel="canonical" href="test-engineering-playbook/dtsqa-test-engineering-playbook/automation-and-tooling/">
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content="test-engineering-playbook/images/govuk-large.png" />
+      <meta name="twitter:title" content="Automation and Tooling - Hot Playbook" />
+      <meta name="twitter:url" content="test-engineering-playbook/dtsqa-test-engineering-playbook/automation-and-tooling/" />
+
+      <meta property="og:image" content="test-engineering-playbook/images/govuk-large.png" />
+      <meta property="og:site_name" content="Hot Playbook" />
+      <meta property="og:title" content="Automation and Tooling" />
+      <meta property="og:type" content="object" />
+      <meta property="og:url" content="test-engineering-playbook/dtsqa-test-engineering-playbook/automation-and-tooling/" />
+
+    
+  </head>
+
+  <body class="govuk-template__body">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+        <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-header__container--full-width">
+    <div class="govuk-header__logo">
+      <a href="https://hmcts.github.io/dtsqa-test-engineering-playbook" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="govuk-header__logotype-crown"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 132 97"
+            height="30"
+            width="36"
+          >
+            <path
+              fill="currentColor" fill-rule="evenodd"
+              d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"
+            ></path>
+          </svg>
+          <span class="govuk-header__logotype-text">
+            GOV.UK
+          </span>
+        </span>
+        <span class="govuk-header__product-name">
+          Hot Playbook
+        </span>
+      </a>
+        <strong class="govuk-tag">Beta</strong>
+    </div>
+    <div class="govuk-header__content">
+      <nav class="govuk-header__navigation govuk-header__navigation--end" aria-label="Menu">
+        <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide menu">Menu</button>
+        <ul id="navigation" class="govuk-header__navigation-list">
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">About</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Get Started</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Documentation</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://hmcts.github.io/dtsqa-test-engineering-playbook">Support</a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      </div>
+
+        <div id="toc-heading" class="toc-show fixedsticky">
+          <button type="button" class="toc-show__label js-toc-show" aria-controls="toc">
+            Table of contents <span class="toc-show__icon"></span>
+          </button>
+        </div>
+
+      <div class="app-pane__body" data-module="in-page-navigation">
+          <div class="app-pane__toc">
+            <div class="toc" data-module="table-of-contents" tabindex="-1" aria-label="Table of contents" role="dialog">
+              
+              <button type="button" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></button>
+              <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
+                      <ul>
+<li><a href="/dtsqa-test-engineering-playbook/"><span>Test Engineering Playbook</span></a>
+<ul>
+<li><a href="/dtsqa-test-engineering-playbook/testing-standards/"><span>Testing Standards</span></a>
+<ul>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/testing-standards/test-strategy/"><span>Test Strategy</span></a>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/testing-standards/definition-ready-done/"><span>Definition of Ready and Done</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/definition-ready-done/#definition-of-ready"><span>Definition of Ready</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/definition-ready-done/#during-the-development-process-the-qa-should"><span>During the development process the QA should:</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/definition-ready-done/#definition-of-done"><span>Definition of Done</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/testing-standards/key-practices/"><span>Key Practices</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/key-practices/#key-practices-key-practices"><span>Key practices:</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/key-practices/#story-development-in-sprint"><span>Story Development (In-Sprint)</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/testing-standards/key-practices/#production-support"><span>Production Support:</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+<li><a href="/dtsqa-test-engineering-playbook/best-practices/"><span>Best Practices</span></a>
+<ul>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/"><span>Manual Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/#any-test-case-that-is-not-suitable-for-automation-testing-should-be-included-in-manual-test-pack"><span>Any test case that is not suitable for automation testing should be included in manual test pack</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/#record-all-your-manual-test-cases-in-zephyr-or-similar"><span>Record all your manual test cases in Zephyr or similar</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/#make-sure-to-include-all-necessary-elements-when-you-write-your-test-case"><span>Make sure to include all necessary elements when you write your test case</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/#test-data-preparation"><span>Test Data Preparation</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/manual-testing/#don-t-forget-to-execute-your-manual-tests-for-every-release"><span>Don’t forget to execute your manual tests for every release</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/"><span>Integration Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#write-integration-tests-wherever-you-serialize-deserialize-data"><span>Write Integration Tests wherever you serialize/deserialize data</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#don-t-test-business-logic-with-integration-tests"><span>Don’t test business logic with integration tests</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#don-t-rely-on-existing-data"><span>Don’t rely on existing data</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#don-t-use-hard-coded-values"><span>Don’t use hard-coded values</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#use-test-doubles"><span>Use Test Doubles</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#log-extensively-in-integration-tests"><span>Log extensively in integration tests</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#keep-unit-tests-and-integration-tests-separate"><span>Keep Unit tests and Integration tests separate</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#don-t-mark-tests-as-ignored"><span>Don’t mark tests as Ignored</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/integration-testing/#run-integration-tests-as-part-of-the-ci-cd-pipeline"><span>Run integration tests as part of the CI/CD pipeline</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/"><span>Exploratory Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#add-exploratory-testing-to-your-existing-test-strategy"><span>Add Exploratory testing to your existing test Strategy</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#structure-your-exploratory-testing"><span>Structure your exploratory testing</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#use-a-destructive-mindset"><span>Use a destructive mindset</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#document-everything-you-find-for-later"><span>Document everything you find for later</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#try-and-automate-the-bugs-you-found-through-exploratory-testing"><span>Try and automate the bugs you found through Exploratory Testing</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/exploratory-testing/#exploratory-testing-is-not-a-good-idea-for-regulated-or-compliance-based-applications"><span>Exploratory testing is not a good idea for regulated or compliance based applications</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/"><span>End to End (Functional) Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#leverage-the-test-automation"><span>Leverage the test Automation</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#reconsider-failing-and-flaky-test"><span>Reconsider failing and flaky test</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#avoid-exception-testing"><span>Avoid Exception Testing</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#use-rest-api-end-to-end-tests"><span>Use REST API End to End tests</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#move-the-tests-to-lower-levels-of-the-pyramid"><span>Move the tests to Lower Levels of the Pyramid</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#e2e-tests-in-the-pipeline"><span>E2E Tests in the pipeline</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#don-t-ignore-flaky-tests-react-as-soon-as-possible"><span>Don’t ignore flaky tests. React as soon as possible.</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#e2e-tests-should-execute-later-in-the-build-pipeline"><span>E2E tests should execute later in the build pipeline</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#create-test-data-smartly"><span>Create test data smartly</span></a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#specific-to-ui"><span>Specific to UI</span></a>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#write-as-few-end-to-end-tests-as-possible"><span>Write as few end to end tests as possible</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#think-before-you-use-xpaths"><span>Think before you use Xpaths</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#use-conditional-waits"><span>Use Conditional Waits</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/end-to-end/#ensure-that-e2e-tests-failures-in-the-pipeline-are-recreatable-locally"><span>Ensure that e2e Tests failures in the pipeline are recreatable locally</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/"><span>Unit Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#tests-should-be-fast"><span>Tests Should Be Fast</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#tests-should-be-reliable"><span>Tests should be reliable</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#tests-should-be-simple-and-readable"><span>Tests Should Be Simple and Readable</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#arrange-act-assert"><span>Arrange, Act, Assert</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#name-your-tests-well"><span>Name your tests well</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#stick-to-single-assertion-per-test"><span>Stick to single assertion per test</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#tests-should-be-deterministic"><span>Tests should be deterministic</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#test-shouldn-t-duplicate-implementation-logic"><span>Test Shouldn’t Duplicate Implementation Logic</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#tests-should-be-independent"><span>Tests should be independent</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#unit-testing-use-test-doubles"><span>Use Test Doubles</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#unit-testing-don-t-mark-tests-as-ignored"><span>Don’t mark tests as Ignored</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#never-write-unit-tests-after-the-production-code"><span>Never write unit tests after the production code</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#unit-tests-should-run-as-part-of-the-ci-cd-pipeline"><span>Unit tests should run as part of the CI/CD Pipeline</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#consider-data-driven-with-your-unit-testing-framework"><span>Consider Data Driven with your unit testing framework</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/unit-testing/#consider-using-testing-techniques-equivalence-class-partition-boundary-value-analysis-state-transition-table"><span>Consider using Testing techniques (Equivalence class Partition, Boundary value Analysis, State Transition Table)</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/"><span>Contract Testing</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#terminology"><span>Terminology</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#what-is-pact-good-for"><span>What is Pact good for?​</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#what-is-it-not-good-for"><span>What is it not good for?​</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#write-consumer-contract-tests-for-all-api-interactions"><span>Write Consumer Contract tests for all API interactions</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#follow-the-naming-standards-for-participants"><span>Follow the naming standards for participants</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#avoid-random-data-in-expectations"><span>Avoid random data in expectations</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#match-types-or-regexes-instead-of-hard-coded-static-data"><span>Match Types or Regexes instead of hard-coded static data</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#one-contract-test-per-consumer-provider-interaction"><span>One Contract test per Consumer-Provider interaction</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#publish-the-consumer-contract-to-the-pactbroker"><span>Publish the Consumer Contract to the PactBroker</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#configure-your-provider-build-to-fetch-the-pact-from-the-broker"><span>Configure your provider build to fetch the pact from the broker</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#use-the-can-i-deploy-tool-in-your-pipeline-to-check-whether-its-safe-to-deploy"><span>Use the can-i-deploy tool in your pipeline to check whether its safe to deploy</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/contract-testing/#contract-testing-don-t-mark-tests-as-ignored"><span>Don’t mark tests as Ignored</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/frontend-testing/"><span>Testing Frontend Applications</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/frontend-testing/#testing-frontend-applications-write-as-few-end-to-end-tests-as-possible"><span>Write as few end to end tests as possible</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/frontend-testing/#testing-frontend-applications-create-test-data-smartly"><span>Create test data smartly</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/frontend-testing/#testing-frontend-applications-think-before-you-use-xpaths"><span>Think before you use Xpaths</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/frontend-testing/#testing-frontend-applications-use-conditional-waits"><span>Use Conditional Waits</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/best-practices/testing-power-platform/"><span>Testing on Power Platform</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/testing-power-platform/#identify-and-test-patterns-and-outcomes-of-your-flows"><span>Identify and test patterns and outcomes of your flows</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/testing-power-platform/#automated-end-to-end-tests-are-very-important"><span>Automated end to end tests are very important</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/testing-power-platform/#understand-the-business-process"><span>Understand the business process</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/best-practices/testing-power-platform/#shift-testing-to-left"><span>Shift Testing to Left</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+<li><a href="/dtsqa-test-engineering-playbook/automation-and-tooling/"><span>Automation and Tooling</span></a>
+<ul>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/automation/"><span>Test and Quality Aproach for Services Developed Using “Automation”</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/automation/#background"><span>Background</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/automation/#the-current-test-approach-with-in-the-pre-team"><span>The current Test approach with in the PRE team</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/test-tools/"><span>Test Tools</span></a>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/test-tools/#automation"><span>Automation</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/test-tools/#standard-test-tools"><span>Standard test tools</span></a>
+          </li>
+          <li>
+            <a href="/dtsqa-test-engineering-playbook/automation-and-tooling/test-tools/#add-ons"><span>Add-ons</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+              </nav>
+            </div>
+          </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <h1 id="automation-and-tooling">Automation and Tooling</h1>
+
+            
+          </main>
+
+          <aside>
+              <ul class="contribution-banner">
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook/blob/source/source/dtsqa-test-engineering-playbook/automation-and-tooling/index.html.md.erb">View source</a></li>
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook/issues/new?body=Problem+with+%27Automation+and+Tooling%27+%28test-engineering-playbook%2Fdtsqa-test-engineering-playbook%2Fautomation-and-tooling%2F%29&amp;labels=bug&amp;title=Re%3A+%27Automation+and+Tooling%27">Report problem</a></li>
+                <li><a href="https://github.com/https://hmcts.github.io/dtsqa-test-engineering-playbook">GitHub Repo</a></li>
+              </ul>
+          </aside>
+
+          <footer class="govuk-footer app-footer" role="contentinfo">
+  <div class="govuk-footer__meta">
+    <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="govuk-footer__licence-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 483.2 195.7"
+        height="17"
+        width="41"
+      >
+        <path
+          fill="currentColor"
+          d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+        />
+      </svg>
+      <span class="govuk-footer__licence-description">
+        All content is available under the
+        <a
+          class="govuk-footer__link"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="license"
+        >Open Government Licence v3.0</a>, except where otherwise stated
+      </span>
+    </div>
+    <div class="govuk-footer__meta-item">
+      <a
+        class="govuk-footer__link govuk-footer__copyright-logo"
+        href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+      >© Crown copyright</a>
+    </div>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/javascripts/application.js"></script>
+  </body>
+</html>
